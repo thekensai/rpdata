@@ -24,7 +24,8 @@ function showSuburbYtd(req, res) {
     function (err, response, body) {
   		//console.log('error', err);
   		if (response && response.headers['app_messages']) {
-      		console.log('res', response.headers['app_messages'] ); //401
+      		console.log(path);
+          console.log(response.headers['app_messages'] ); 
       		res.writeHead(404);
       		res.end();
   		}
