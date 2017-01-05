@@ -1,0 +1,11 @@
+<!--div class="jumbotron text-center">
+    <h1>Home Page</h1>
+
+    <a href="/events" class="btn btn-lg btn-danger">See Events</a>
+</div-->
+
+<%- contentFor('links') %>
+
+<% for(var i=0; i<suburbs.length; i++) { %>
+        <li><a href="#" class="suburbs" data-suburb="<%= suburbs[i].lId%>" id="suburb-<%= suburbs[i].lId%>"><%= suburbs[i].name %></a></li>
+<% } %>
