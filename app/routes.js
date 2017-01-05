@@ -11,4 +11,4 @@ module.exports = router;
 // main routes
 router.get('/', mainController.showHome);
 
-router.get('/chart/:suburb/:width/:height', chartController.showSuburbYtd);
+router.get('/chart/:suburb/:pType/:width/:height', chartController.showSuburbYtd);

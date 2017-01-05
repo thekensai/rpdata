@@ -75,15 +75,30 @@
       <a class="navbar-brand" href="#">RPDemo</a>
 
     </div>
+
+    <ul class="nav navbar-nav">
+        <li class="active" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <span id="selectedSuburb">Choose a suburb</span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" id="dropdownSuburb">
+            <%-links%>
+          </ul>
+        </li>
+      </ul>
+
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
         <li class="active" class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span id="selectedTimespan">Choose a suburb</span>
+            <span id="selectedPropertyType" data-property-type="1">House</span>
             <span class="caret"></span>
           </a>
-          <ul class="dropdown-menu" id="dropdownTimespan">
-            <%-links%>
+          <ul class="dropdown-menu" id="dropdownPropertyType">
+            <!--1 = Houses 2 = Units + 3 = Land 4 = Apartments 5 = Flats 6 = all Residential types -->
+            <li><a href="#" class="property-types" data-property-type="1">House</a></li>
+            <li><a href="#" class="property-types" data-property-type="2">Unit</a></li>
           </ul>
         </li>
       </ul>
@@ -137,13 +152,33 @@
 </body>
 <script type="text/javascript">
 
-
     $( document ).ready(function() {
-        $('#dropdownTimespan li').on('click', function() {
-                $('#selectedTimespan').html($(this).find('a').html());
+        $('#dropdownSuburb li').on('click', function() {
+                $('#selectedSuburb').html($(this).find('a').html());
+                $('#selectedSuburb').data('suburb', $(this).find('a').data('suburb'));
+        });
+
+        $('#dropdownPropertyType li').on('click', function() {
+                $('#selectedPropertyType').html($(this).find('a').html());
+                $('#selectedPropertyType').data('property-type', $(this).find('a').data('property-type'));
         });
 
         var status = $('.jumbotron');
+
+        var showChart = function () {
+                  $("#graph").hide();
+                  $('#nodata').hide();
+                  $('#loading').show();
+                  status.show();
+
+                  $("#graph").attr("src", "/chart/" 
+                    + $('#selectedSuburb').data('suburb') + '/' 
+                    + $('#selectedPropertyType').data('property-type') + '/' 
+                    + parseInt($(".col-sm-10").width()) + '/' 
+                    + parseInt($(".col-sm-1").height()));
+                  
+                  e.preventDefault();
+            };
 
         $("#graph").on('error', function() { 
           $(this).hide();
@@ -154,17 +189,8 @@
           status.hide();
         });
 
-        $(".suburbs").click(function(e){
-          $("#graph").hide();
-          $('#nodata').hide();
-          $('#loading').show();
-          status.show();
-
-          var id = $(e.target).data('suburb');
-          $("#graph").attr("src", "/chart/" + id + '/' + parseInt($(".col-sm-10").width()) + '/' + parseInt($(".col-sm-1").height()));
-          
-          e.preventDefault();
-        });
+        $(".suburbs").click(showChart);
+        $(".property-types").click(showChart);
     });
     
    

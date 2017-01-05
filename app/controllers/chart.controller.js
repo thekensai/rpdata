@@ -14,7 +14,9 @@ function showSuburbYtd(req, res) {
     + req.params.height + 'x' + req.params.width 
     + '&fromDate=2016-01-01&toDate=2017-01-01&s1.lId=' 
     + req.params.suburb
-    + '&s1.lTId=8&s1.pTId=2&s1.mTId=21&access_token=' + global.access_token;
+    + '&s1.lTId=8&s1.pTId=' 
+    + req.params.pType 
+    + '&s1.mTId=21&access_token=' + global.access_token;
 
   var request = require('request');
   
