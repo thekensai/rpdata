@@ -29,20 +29,26 @@
       display: none;
     }
 
-    .glyphicon.spinning {
-        font-size: 40px;
-        animation: spin 1s infinite linear;
-        -webkit-animation: spin2 1s infinite linear;
+    .loader {
+      margin:0 auto;
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid black;
+      border-bottom: 16px solid black;
+      width: 120px;
+      height: 120px;
+      -webkit-animation: spin 2s linear infinite;
+      animation: spin 2s linear infinite;
+    }
+
+    @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
     }
 
     @keyframes spin {
-        from { transform: scale(1) rotate(0deg); }
-        to { transform: scale(1) rotate(360deg); }
-    }
-
-    @-webkit-keyframes spin2 {
-        from { -webkit-transform: rotate(0deg); }
-        to { -webkit-transform: rotate(360deg); }
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* Set black background color, white text and some padding */
@@ -126,7 +132,8 @@
         <h1 class="noshow" id="nodata">No data available</h1>
 
         <div class="noshow" id="loading">
-          <span class="glyphicon glyphicon-refresh spinning"></span> 
+          <!--span class="glyphicon glyphicon-refresh spinning"></span--> 
+          <div class="loader"></div>
           <h2>Loading...    </h2>
         </div>
       </div>

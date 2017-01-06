@@ -14,9 +14,10 @@ module.exports = {
 		    res.render('pages/home', 
 		    	{ suburbs: text.split(require('os').EOL).map(function(s) {
 		    		var info = s.split(' ');
+		    		var len = info.length;
 		    		return {
-			    		name: info.slice(0, 3).join(' '),
-			    		lId: info[3]
+			    		name: info.slice(0, len - 2).join(' '),
+			    		lId: info[len - 2]
 						}
 					})
 				}
