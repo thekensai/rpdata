@@ -31,7 +31,7 @@ module.exports = {
 async function getToken() {
 	const https = require('https');
 
-	https.get('https://access-api.corelogic.asia/access/oauth/token?grant_type=client_credentials&client_id=21b64c45&client_secret=fccfa22836b75856938b075360d7fd25', 
+	https.get('https://access-api.corelogic.asia/access/oauth/token?grant_type=client_credentials&client_id=21b64c45&client_secret=0e39218c67d9cdc727df04f8936addfd', 
 		(res) => {
 
 		  var body = '';
@@ -45,7 +45,7 @@ async function getToken() {
 
 	            var parsed = JSON.parse(body);
 	            global.access_token = parsed.access_token;
-
+//console.log(global.access_token);
 	        });
 
 	}).on('error', (e) => {
