@@ -7,7 +7,7 @@ module.exports = {
 
 	const https = require('https'),
   host = 'https://search-sandbox-api.corelogic.asia',
-  path = '/search/au/property/geo/radius/lastSale?radius=100&lat=-28.008176&lon=153.428172&beds=2-4&pTypes=HOUSE&price=500000-700000&sort=beds,desc&sort=price,asc&page=0&size=5';
+  path = '/search/au/property/locality/22677/lastSale?&pTypes=HOUSE&sort=price,asc&page=0&size=5';
 
 
   var request = require('request');
@@ -29,7 +29,9 @@ module.exports = {
   		}
       	else {
       		var json = JSON.parse(body);
-      		res.render('pages/sales', json["_embedded"]);
+          //res.send(json["_embedded"]["propertySummaryList"]);
+
+      		res.render('pages/sales', {layout: false, data: json["_embedded"]["propertySummaryList"].map(s => s.propertySummary)});
       	}
     });
 

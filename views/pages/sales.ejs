@@ -1,50 +1,120 @@
-<% for(var i=0; i < propertySummaryList.length; i++) { %>
+<!--
+{
+  "address": {
+    "singleLineAddress": "203/293 Angas Street Adelaide SA 5000"
+  },
+  "attributes": {
+    "bathrooms": 2,
+    "bedrooms": 3,
+    "carSpaces": 1,
+    "isCalculatedLandArea": true,
+    "landArea": 0,
+    "lockUpGarages": 1
+  },
+  "coordinate": {
+    "latitude": -34.92993899,
+    "longitude": 138.61135998
+  },
+  "id": 17202558,
+  "lastSaleDetail": {
+    "agency": "Phillis Real Estate - Adelaide (Rla 168573)",
+    "contractDate": "2016-02-15",
+    "isAgentsAdvice": false,
+    "isArmsLength": true,
+    "price": 785000,
+    "settlementDate": "1930-01-01",
+    "type": "Consideration Represents Whole Interest For Property"
+  },
+  "locationIdentifiers": {
+    "localityId": 22677,
+    "postCodeId": 1407129,
+    "streetId": 2901500
+  },
+  "propertyPhoto": {
+    "largePhotoUrl": "https://static.rpdata.com/rpdaAU/photo/listsale/768x512/15/10/21/26197825/26197825_1.JPG",
+    "mediumPhotoUrl": "https://static.rpdata.com/rpdaAU/photo/listsale/470x313/15/10/21/26197825/26197825_1.JPG",
+    "scanDate": "2015-10-21",
+    "thumbnailPhotoUrl": "https://static.rpdata.com/rpdaAU/photo/listsale/120x80/15/10/21/26197825/26197825_1.JPG"
+  },
+  "propertyStatus": {
+    "otmForRent": false,
+    "otmForSale": false,
+    "recentSale": false
+  },
+  "propertySubType": "Unit: Townhouse/Villa",
+  "propertySubTypeShort": "Townhouse/Villa",
+  "propertyType": "UNIT"
+}
+-->
+
+<table>
+<% for(var i=0; i < data.length; i++) { %>
+<tr>
+<td>
+<img src="<%= data[i].propertyPhoto.thumbnailPhotoUrl%>"/>
+</td>
+<td>
 <table>
 	<tr>
-		<td><b>10 Keats Street Carlingford NSW 2118</b></td>
+		<td><b><%= data[i].address.singleLineAddress%></b></td>
 		<td></td>
 		<td></td>
 		<td>
-			<img src="img/bed.gif">
-			<img src="img/bath.gif">
-			<img src="img/carpark.gif">
-			<img src="img/area.gif">
+			<table class="property-attribute">
+			<tr>
+			<td style="background-image:url('img/bed.gif');">
+				<%= data[i].attributes.bedrooms%>
+			</td>
+			<td style="background-image:url('img/bath.gif');">
+				<%= data[i].attributes.bathrooms%>
+			</td>
+			<td style="background-image:url('img/carpark.gif');">
+				<%= data[i].attributes.lockUpGarages%>
+			</td>
+			<td style="background-image:url('img/area.gif');">
+				<%= data[i].attributes.landArea%>
+			</td>
+			</tr>
+			</table>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			Sale Price:
 		</td>
-		<td>$1,353,000</td>
+		<td>$<%= data[i].lastSaleDetail.price%></td>
 		<td></td>
 		<td>
-			Lot/Plan: 18/DP217843
+			Lot/Plan: 
 		</td>
 	</tr>
 	<tr>
 		<td>Sale date:</td>
-		<td>06/06/2016</td>
+		<td><%= data[i].lastSaleDetail.contractDate%></td>
 		<td></td>
 		<td>
-			Map ref: UBD NSW: SYD172, G16
+			Map ref: 
 		</td>
 	</tr>
 	<tr>
 		<td>
 			Sales type:
 		</td>
-		<td>Unknown</td>
+		<td><%= data[i].lastSaleDetail.type%></td>
 		<td>Sales advised by:</td>
 		<td>
-			Agent
+			<%= data[i].lastSaleDetail.isAgentsAdvice ? 'Agent' : ''%>
 		</td>
 	</tr>
 	<tr>
 		<td>
 			Sold by:
 		</td>
-		<td>Now Property</td>
+		<td><%= data[i].lastSaleDetail.agency%></td>
 		
 	</tr>
 </table>
+</td>
+</tr>
 <% } %>
+</table>
