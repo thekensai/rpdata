@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/dygraph/1.1.1/dygraph-combined.js"></script>
@@ -110,7 +111,7 @@
           </ul>
         </li>
 
-        <li><a href="sales">Sales</a></li>
+        <li><a href="sales" class="sales">Sales</a></li>
       </ul>
 
 
@@ -139,6 +140,7 @@
       </div>
 
       <img id="graph"></img>
+      <div id="sales"></div>
 
     </div>
     <div class="col-sm-1 sidenav">
@@ -183,6 +185,7 @@
 
             $("#graph").hide();
             $('#nodata').hide();
+            $("#sales").empty();
             $('#loading').show();
             status.show();
 
@@ -195,7 +198,23 @@
             e.preventDefault();
         };
 
+        var showSales= function (e) {
+
+            $("#graph").hide();
+            $('#nodata').hide();
+            $('#loading').show();
+            status.show();
+
+            $.ajax({url: "/sales", success: function(result){
+                status.hide();
+                $("#sales").html(result);
+            }});
+            
+            e.preventDefault();
+        };
+
         $("#graph").on('error', function() { 
+          console.log('error loading chart');
           $(this).hide();
           $('#nodata').show();
           $('#loading').hide();
@@ -206,6 +225,7 @@
 
         $(".suburb").click(showChart);
         $(".property-type").click(showChart);
+        $(".sales").click(showSales);
     });
     
    
