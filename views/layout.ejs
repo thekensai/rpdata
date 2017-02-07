@@ -172,6 +172,15 @@
         var status = $('.jumbotron');
 
         var showChart = function (e) {
+            e.preventDefault();
+
+            if (e.target.className == 'property-type' && !$('#selectedSuburb').data('suburb')) {
+              $('#nodata').text('Please select a surburb');
+              $('#nodata').show();
+              status.show();
+              return;
+            };
+
             var item = $(e.target);
             var className = item.attr('class');
 
@@ -194,28 +203,39 @@
               + $('#selectedPropertyType').data('property-type') + '/' 
               + parseInt($(".col-sm-10").width()) + '/' 
               + parseInt($(".col-sm-1").height()));
-            
-            e.preventDefault();
+
         };
 
         var showSales= function (e) {
+
+            e.preventDefault();
+
+            if (!$('#selectedSuburb').data('suburb')) {
+              $('#nodata').text('Please select a surburb');
+              $('#nodata').show();
+              status.show();
+              return;
+            };
 
             $("#graph").hide();
             $('#nodata').hide();
             $('#loading').show();
             status.show();
 
-            $.ajax({url: "/sales", success: function(result){
+            $.ajax({
+              url: "/sales/" + $('#selectedSuburb').data('suburb') + '/' 
+                + $('#selectedPropertyType').data('property-type'), 
+              success: function(result){
                 status.hide();
                 $("#sales").html(result);
             }});
             
-            e.preventDefault();
         };
 
         $("#graph").on('error', function() { 
           console.log('error loading chart');
           $(this).hide();
+          $('#nodata').text('No data available');
           $('#nodata').show();
           $('#loading').hide();
         }).on('load', function() { 

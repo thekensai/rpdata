@@ -47,20 +47,18 @@
 }
 -->
 
-<table>
+<table style="border-collapse: separate;border-spacing: 5px;">
 <% for(var i=0; i < data.length; i++) { %>
 <tr>
-<td>
-<img src="<%= data[i].propertyPhoto.thumbnailPhotoUrl%>"/>
-</td>
-<td>
-<table>
-	<tr>
-		<td><b><%= data[i].address.singleLineAddress%></b></td>
-		<td></td>
-		<td></td>
-		<td>
-			<table class="property-attribute">
+<td style="padding:10px;border: 1px;border-color: grey;border-style: solid;">
+
+<img src="<%= data[i].propertyPhoto.mediumPhotoUrl%>" style="float:left;padding:5px;width:200px" class="img-responsive"/>
+
+<div  style="float:left">
+	<h2><span class="text-nowrap text-danger"><%= data[i].address.singleLineAddress%></span></h2>
+</div>
+
+<table class="property-attribute"  style="float:right;border-collapse: separate;border-spacing: 5px;">
 			<tr>
 			<td style="background-image:url('img/bed.gif');">
 				<%= data[i].attributes.bedrooms%>
@@ -72,48 +70,43 @@
 				<%= data[i].attributes.lockUpGarages%>
 			</td>
 			<td style="background-image:url('img/area.gif');">
-				<%= data[i].attributes.landArea%>
+				<%= data[i].attributes.landArea%>m2
 			</td>
 			</tr>
-			</table>
-		</td>
-	</tr>
+</table>
+
+<table style="width: 400px;float:left" class="bg-warning property-info">
 	<tr>
-		<td>
+		<td class="heading">
 			Sale Price:
 		</td>
 		<td>$<%= data[i].lastSaleDetail.price%></td>
-		<td></td>
-		<td>
-			Lot/Plan: 
-		</td>
 	</tr>
 	<tr>
-		<td>Sale date:</td>
+		<td class="heading">Sale date:</td>
 		<td><%= data[i].lastSaleDetail.contractDate%></td>
+	</tr>
+	<tr>
+		<td class="heading">
+			Land Size:
+		</td>
+		<td><%= data[i].attributes.landArea%>m2</td>
+	</tr>
+	<tr>
+		<td class="heading">
+			Distance From Subject
+		</td>
 		<td></td>
-		<td>
-			Map ref: 
-		</td>
-	</tr>
-	<tr>
-		<td>
-			Sales type:
-		</td>
-		<td><%= data[i].lastSaleDetail.type%></td>
-		<td>Sales advised by:</td>
-		<td>
-			<%= data[i].lastSaleDetail.isAgentsAdvice ? 'Agent' : ''%>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			Sold by:
-		</td>
-		<td><%= data[i].lastSaleDetail.agency%></td>
 		
 	</tr>
 </table>
+
+<div class="bg-warning" style="float:right;">
+	<span  class="heading"><b>Attributes:</b></span>
+	<br>
+	<%= data[i].attributes.bedrooms%> Beds, <%= data[i].attributes.bathrooms%> Baths, <%= data[i].attributes.carSpaces%> Car Spaces,
+	<%= data[i].attributes.lockUpGarages%> Lock Up Garages,  Ensuites
+</div>
 </td>
 </tr>
 <% } %>

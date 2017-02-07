@@ -7,11 +7,15 @@ module.exports = {
 
 	const https = require('https'),
   host = 'https://search-sandbox-api.corelogic.asia',
-  path = '/search/au/property/locality/22677/lastSale?&pTypes=HOUSE&sort=price,asc&page=0&size=5';
-
+  path = '/search/au/property/locality/' 
+  + req.params.suburb
+  + '/lastSale?&pTypes='
+  + (req.params.pType ? 'HOUSE' : 'UNIT')
+  + '&sort=price,asc&page=0&size=5';
+//22677
 
   var request = require('request');
-  //console.log(global.access_token);
+  console.log('path:', path);
   request({
     headers: {
       'Authorization': 'Bearer '  + global.access_token,
