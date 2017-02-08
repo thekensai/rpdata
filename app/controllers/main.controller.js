@@ -3,27 +3,17 @@ module.exports = {
   // show the home page
   showHome: (req, res) => {
 
-  	var fs = require('fs');
-  	var path = require('path');
-	
-	var text = fs.readFileSync(path.resolve(__dirname) + '/../../locality.txt').toString();
-	//console.log(text);
-
+  	var db = require.main.require('./db.js');
 	getToken().then(
-		function() {
-		    res.render('pages/home', 
-		    	{ suburbs: text.split(require('os').EOL).map(function(s) {
-		    		var info = s.split(' ');
-		    		var len = info.length;
-		    		return {
-			    		name: info.slice(0, len - 2).join(' '),
-			    		lId: info[len - 2]
-						}
-					})
-				}
-			);
-		}
-	)
+		db.localities.findAll(function(err, result) {
+	        if (err)
+	        {
+	          res.status(404);
+	          return;
+	        }
+	        
+	        res.render('pages/home', { suburbs: result});
+	    }));
   }
 };
 

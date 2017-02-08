@@ -7,5 +7,5 @@
 <%- contentFor('links') %>
 
 <% for(var i=0; i<suburbs.length; i++) { %>
-        <li><a href="#" class="suburb" data-suburb="<%= suburbs[i].lId%>" id="suburb-<%= suburbs[i].lId%>"><%= suburbs[i].name %></a></li>
+        <li><a href="#" class="suburb" data-suburb="<%= suburbs[i].localityId%>" id="suburb-<%= suburbs[i].localityId%>"><%= suburbs[i].locality %></a></li>
 <% } %>

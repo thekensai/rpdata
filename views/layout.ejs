@@ -111,9 +111,19 @@
           </ul>
         </li>
 
-        <li><a href="sales" class="sales">Sales</a></li>
-      </ul>
+        <li class="active" class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <span id="selectedInfoType" data-info-type="sales">Past Sales</span>
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" id="dropdownInfoType">
+            
+            <li><a href="#" class="info-type" data-info-type="sales">Past Sales</a></li>
+            <li><a href="#" class="info-type" data-info-type="trend">Trend</a></li>
+          </ul>
+        </li>
 
+      </ul>
 
     </div>
   </div>
@@ -172,14 +182,36 @@
         var status = $('.jumbotron');
 
         var showChart = function (e) {
+            $("#graph").attr("src", "/chart/" 
+              + $('#selectedSuburb').data('suburb') + '/' 
+              + $('#selectedPropertyType').data('property-type') + '/' 
+              + parseInt($(".col-sm-10").width()) + '/' 
+              + parseInt($(".col-sm-1").height()));
+
+        };
+
+        var showSales= function (e) {
+            $.ajax({
+              url: "/sales/" + $('#selectedSuburb').data('suburb') + '/' 
+                + $('#selectedPropertyType').data('property-type'), 
+              success: function(result){
+                status.hide();
+                $("#sales").html(result);
+            }});
+            
+        };
+
+        var show = function (e) {
             e.preventDefault();
 
-            if (e.target.className == 'property-type' && !$('#selectedSuburb').data('suburb')) {
-              $('#nodata').text('Please select a surburb');
-              $('#nodata').show();
-              status.show();
-              return;
-            };
+            if (e.target.className != 'suburb') {
+              if (!$('#selectedSuburb').data('suburb')) {
+                $('#nodata').text('Please select a surburb');
+                $('#nodata').show();
+                status.show();
+                return;
+              };
+            }
 
             var item = $(e.target);
             var className = item.attr('class');
@@ -187,6 +219,9 @@
             var dropdown = $('#selectedPropertyType');
             if (className == 'suburb') {
                dropdown = $('#selectedSuburb');
+            }
+            else if (className == 'info-type') {
+               dropdown = $('#selectedInfoType');
             }
 
             dropdown.html(item.html());
@@ -198,38 +233,9 @@
             $('#loading').show();
             status.show();
 
-            $("#graph").attr("src", "/chart/" 
-              + $('#selectedSuburb').data('suburb') + '/' 
-              + $('#selectedPropertyType').data('property-type') + '/' 
-              + parseInt($(".col-sm-10").width()) + '/' 
-              + parseInt($(".col-sm-1").height()));
-
-        };
-
-        var showSales= function (e) {
-
-            e.preventDefault();
-
-            if (!$('#selectedSuburb').data('suburb')) {
-              $('#nodata').text('Please select a surburb');
-              $('#nodata').show();
-              status.show();
-              return;
-            };
-
-            $("#graph").hide();
-            $('#nodata').hide();
-            $('#loading').show();
-            status.show();
-
-            $.ajax({
-              url: "/sales/" + $('#selectedSuburb').data('suburb') + '/' 
-                + $('#selectedPropertyType').data('property-type'), 
-              success: function(result){
-                status.hide();
-                $("#sales").html(result);
-            }});
-            
+            var data = $('#selectedInfoType').data("info-type");
+            if (data == "sales") showSales();
+            else  showChart();
         };
 
         $("#graph").on('error', function() { 
@@ -243,9 +249,9 @@
           status.hide();
         });
 
-        $(".suburb").click(showChart);
-        $(".property-type").click(showChart);
-        $(".sales").click(showSales);
+        $(".suburb").click(show);
+        $(".info-type").click(show);
+        $(".property-type").click(show);
     });
     
    

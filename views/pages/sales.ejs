@@ -52,60 +52,69 @@
 <tr>
 <td style="padding:10px;border: 1px;border-color: grey;border-style: solid;">
 
-<img src="<%= data[i].propertyPhoto.mediumPhotoUrl%>" style="float:left;padding:5px;width:200px" class="img-responsive"/>
+<div class="flex-container">
+	<!--left left right left right-->
+	<img src="<%= data[i].propertyPhoto.mediumPhotoUrl%>" style="padding:5px;" class="img-responsive"/>
 
-<div  style="float:left">
-	<h2><span class="text-nowrap text-danger"><%= data[i].address.singleLineAddress%></span></h2>
-</div>
+	<div class="flex-container" style="">
+		<div  style="float:left">
+			<% for(var j=0; j < data[i].address.singleLineAddress.length; j++) { %>
+			<span class="text-nowrap text-danger" style="font-size:xx-large"><%= data[i].address.singleLineAddress[j]%></span>
+			<% } %>
+		</div>
 
-<table class="property-attribute"  style="float:right;border-collapse: separate;border-spacing: 5px;">
+		<table class="property-attribute"  style="padding: 8px; border-collapse: separate;border-spacing: 5px;">
+					<tr>
+					<td style="background-image:url('img/bed.gif');">
+						<%= data[i].attributes.bedrooms%>
+					</td>
+					<td style="background-image:url('img/bath.gif');">
+						<%= data[i].attributes.bathrooms%>
+					</td>
+					<td style="background-image:url('img/carpark.gif');">
+						<%= data[i].attributes.lockUpGarages%>
+					</td>
+					<td style="background-image:url('img/area.gif');">
+						<%= data[i].attributes.landArea%>m2
+					</td>
+					</tr>
+		</table>
+
+		<table style="padding: 8px;" class="bg-warning property-info">
 			<tr>
-			<td style="background-image:url('img/bed.gif');">
-				<%= data[i].attributes.bedrooms%>
-			</td>
-			<td style="background-image:url('img/bath.gif');">
-				<%= data[i].attributes.bathrooms%>
-			</td>
-			<td style="background-image:url('img/carpark.gif');">
-				<%= data[i].attributes.lockUpGarages%>
-			</td>
-			<td style="background-image:url('img/area.gif');">
-				<%= data[i].attributes.landArea%>m2
-			</td>
+				<td class="heading">
+					Sale Price:
+				</td>
+				<td>$<%= data[i].lastSaleDetail.price%></td>
 			</tr>
-</table>
+			<tr>
+				<td class="heading">Sale date:</td>
+				<td><%= data[i].lastSaleDetail.contractDate%></td>
+			</tr>
+			<tr>
+				<td class="heading">
+					Land Size:
+				</td>
+				<td><%= data[i].attributes.landArea%>m2</td>
+			</tr>
+			<tr>
+				<td class="heading">
+					Distance From Subject
+				</td>
+				<td></td>
+				
+			</tr>
+		</table>
 
-<table style="width: 400px;float:left" class="bg-warning property-info">
-	<tr>
-		<td class="heading">
-			Sale Price:
-		</td>
-		<td>$<%= data[i].lastSaleDetail.price%></td>
-	</tr>
-	<tr>
-		<td class="heading">Sale date:</td>
-		<td><%= data[i].lastSaleDetail.contractDate%></td>
-	</tr>
-	<tr>
-		<td class="heading">
-			Land Size:
-		</td>
-		<td><%= data[i].attributes.landArea%>m2</td>
-	</tr>
-	<tr>
-		<td class="heading">
-			Distance From Subject
-		</td>
-		<td></td>
-		
-	</tr>
-</table>
-
-<div class="bg-warning" style="float:right;">
-	<span  class="heading"><b>Attributes:</b></span>
-	<br>
-	<%= data[i].attributes.bedrooms%> Beds, <%= data[i].attributes.bathrooms%> Baths, <%= data[i].attributes.carSpaces%> Car Spaces,
-	<%= data[i].attributes.lockUpGarages%> Lock Up Garages,  Ensuites
+		<div class="bg-warning" style="padding: 10px; ">
+			<span  class="heading"><b>Attributes:</b></span>
+			<br>
+			<span>
+			<%= data[i].attributes.bedrooms%> Beds, <%= data[i].attributes.bathrooms%> Baths, <%= data[i].attributes.carSpaces%> Car Spaces,
+			<%= data[i].attributes.lockUpGarages%> Lock Up Garages,  Ensuites
+			</span>
+		</div>
+	</div>
 </div>
 </td>
 </tr>

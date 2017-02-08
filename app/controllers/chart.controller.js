@@ -22,7 +22,7 @@ function showSuburbYtd(req, res) {
 
   request(host + path, {encoding: null},
     function (err, response, body) {
-  		console.log(err,body);
+  		
   		if (response && response.headers['app_messages']) {
       		console.log('params:', req.params);
           console.log('app_messages:', response.headers['app_messages'] ); 
