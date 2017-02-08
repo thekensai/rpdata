@@ -3,18 +3,17 @@ module.exports = {
   // show the home page
   showSales: (req, res) => {
 
-	//console.log(text);
-
 	const https = require('https'),
   host = 'https://search-sandbox-api.corelogic.asia',
   path = '/search/au/property/locality/' 
   + req.params.suburb
   + '/lastSale?&pTypes='
-  + (req.params.pType ? 'HOUSE' : 'UNIT')
+  + (req.params.pType == 0 ? 'HOUSE' : 'UNIT')
   + '&sort=price,asc&page=0&size=5';
 //22677
 
   var request = require('request');
+  console.log(req.params);
   console.log('sales path:', path);
 
   request({

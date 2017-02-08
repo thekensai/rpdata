@@ -101,13 +101,13 @@
       <ul class="nav navbar-nav">
         <li class="active" class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <span id="selectedPropertyType" data-property-type="1">House</span>
+            <span id="selectedPropertyType" data-property-type="0">House</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu" id="dropdownPropertyType">
             
-            <li><a href="#" class="property-type" data-property-type="1">House</a></li>
-            <li><a href="#" class="property-type" data-property-type="2">Unit</a></li>
+            <li><a href="#" class="property-type" data-property-type="0">House</a></li>
+            <li><a href="#" class="property-type" data-property-type="1">Unit</a></li>
           </ul>
         </li>
 
@@ -225,7 +225,9 @@
             }
 
             dropdown.html(item.html());
+  //          console.log(dropdown,className, item.data(className));
             dropdown.data(className, item.data(className));
+//console.log(dropdown.data(className));
 
             $("#graph").hide();
             $('#nodata').hide();

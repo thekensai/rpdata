@@ -42,9 +42,23 @@ body  {
 .heading {
   color: red;
   font-weight: 600;
+  padding-left: 10px;
 }
 
-.flex-container {
+.flex-container{
   display: flex; 
-  flex-wrap: wrap
+}
+
+.flex-container-inner{
+  display: flex; 
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width:1100px) {
+  .flex-container   { flex-wrap: wrap;  }
+  .flex-item:first-child { flex-basis: 100%; }
+}
+@media screen and (max-width:660px){
+  .flex-container{flex-flow:column;}
+  .flex-item:first-child {flex-basis:100%;max-width: 87%}
 }
