@@ -27,8 +27,8 @@ body  {
 }
 
 .property-attribute td {
-  width: 70px;
-  height: 70px;
+  width: 65px;
+  height: 65px;
   background-repeat:no-repeat;
   vertical-align:bottom;
   text-align:center;
@@ -43,6 +43,10 @@ body  {
   color: red;
   font-weight: 600;
   padding-left: 10px;
+}
+
+.property-image {
+  cursor: pointer;
 }
 
 .flex-container{
@@ -61,4 +65,16 @@ body  {
 @media screen and (max-width:660px){
   .flex-container{flex-flow:column;}
   .flex-item:first-child {flex-basis:100%;max-width: 87%}
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
 }

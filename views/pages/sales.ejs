@@ -54,12 +54,16 @@
 
 <div class="flex-container">
 	<!--left left right left right-->
-	<img src="<%= data[i].propertyPhoto.mediumPhotoUrl%>" style="padding:5px;" class="flex-item"/>
+	<img src="<%= data[i].propertyPhoto.mediumPhotoUrl%>" style="padding:5px;" class="property-image flex-item" data-property-id="<%=data[i].id%>"/>
 
 	<div class="flex-container-inner flex-item" style="">
 		<div  style="" class="flex-item-inner">
-			<% for(var j=0; j < data[i].address.singleLineAddress.length; j++) { %>
-			<span class="text-nowrap text-danger" style="font-size:xx-large"><%= data[i].address.singleLineAddress[j]%></span>
+			<% if (Array.isArray(data[i].address.singleLineAddress)) {%>
+				<% for(var j=0; j < data[i].address.singleLineAddress.length; j++) { %>
+				<span class="text-nowrap text-danger" style="font-size:xx-large"><%= data[i].address.singleLineAddress[j]%></span>
+				<% }%>
+			<%} else {%>
+				<span class="text-danger" style="font-size:xx-large"><%= data[i].address.singleLineAddress%></span>
 			<% } %>
 		</div>
 
@@ -101,16 +105,16 @@
 				<td class="heading">
 					Distance From Subject
 				</td>
-				<td></td>
+				<td><%= data[i].radiusSummary ? data[i].radiusSummary.distanceFromPoint + 'KM' : '' %></td>
 				
 			</tr>
 		</table>
 
-		<div style="padding-top: 10px; ">
+		<div style="margin-top: 0px;">
 		<div class="bg-warning" >
 			<span  class="heading"><b>Attributes:</b></span>
 			<br>
-			<span>
+			<span style="padding-left: 10px;">
 			<%= data[i].attributes.bedrooms%> Beds, <%= data[i].attributes.bathrooms%> Baths, <%= data[i].attributes.carSpaces%> Car Spaces,
 			<%= data[i].attributes.lockUpGarages%> Lock Up Garages,  Ensuites
 			</span>
@@ -122,3 +126,20 @@
 </tr>
 <% } %>
 </table>
+
+<script type='text/javascript'>
+        $(".property-image").click(function (e) {
+          $.ajax({
+              url: "/sales/" + $(this).data('property-id') + '/' 
+                ,//+ $('#selectedPropertyType').data('property-type'), 
+              success: function(result){
+                $("#sales").addClass('hidden');
+                setTimeout(function() {
+					$("#sales").html(result);
+					$("#sales").removeClass('hidden');
+					$("#sales").addClass('visible');
+                }, 1000);
+                
+            }});
+        });
+</script>
