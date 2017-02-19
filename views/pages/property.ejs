@@ -1,0 +1,256 @@
+<div class="section-heading">
+PROPERTY DESCRIPTION
+</div>
+
+<div style="border: 1px;border-style: solid" >
+
+<div class="flex-container">
+	<div class="flex-item flex-container" style="flex-direction:column">
+		<img class="flex-item property-photo" src="<%= data.defaultPhoto.mediumPhotoUrl%>"/>
+		<table class="flex-item property-info property-info-sale">
+		<th>
+			Sales History
+		</th>
+		<tr>
+		<td>
+			Sale Date
+		</td>
+		<td>
+			Sale Price
+		</td>
+		<td>
+			Sale Type
+		</td>
+		</tr>
+		<tr>
+		<td>
+			<%= data.lastSaleDetail ? data.lastSaleDetail.contractDate : ''%>
+		</td>
+		<td>
+			$<%= data.lastSaleDetail ? data.lastSaleDetail.price : ''%>
+		</td>
+		<td>
+			<%= data.lastSaleDetail ? data.lastSaleDetail.type : ''%>
+		</td>
+		</tr>
+		</table>
+	</div>
+
+	<div class="flex-item flex-container"  style="flex-direction:column">
+		<table>
+		<tr>
+		<td class="address">
+		<%= data.address.singleLine%>
+		</td>
+		</tr>
+		<tr>
+		<td>
+		ESTIMATED VALUE: 
+		<span class="heading">$<%= data.avmDetail ? data.avmDetail.estimate : ''%></span>
+		</td>
+		</tr>
+		<tr>
+		<td>
+		Estimated Price Range: 
+		<span class="heading">$<%= data.avmDetail ? data.avmDetail.lowEstimate : ''%> - $<%= data.avmDetail ? data.avmDetail.highEstimate : ''%></span>
+		</td>
+		</tr>
+		<tr>
+		<td>
+		Forecast Standard Deviation* &#177;
+		<span class="heading"><%=data.avmDetail ?  data.avmDetail.fsd : ''%>%</span>	
+		</td>
+		</tr>
+		<tr>
+		<td  class="small-print">
+		This estimate value has been compiled incorporating attribute data
+		provided solely by RP Data and its suppliers
+		</td>
+		</tr>
+		</table>
+
+		<div style="margin-left:auto">
+			Attributes used for this model
+		</div>
+				<table class="property-attribute"  style="margin-left:auto;padding: 8px; border-collapse: separate;border-spacing: 5px;">
+							<tr>
+							<td style="background-image:url('img/bed.gif');">
+								<%= data.attributes.bedrooms%>
+							</td>
+							<td style="background-image:url('img/bath.gif');">
+								<%= data.attributes.bathrooms%>
+							</td>
+							<td style="background-image:url('img/carpark.gif');">
+								<%= data.attributes.lockUpGarages%>
+							</td>
+							<td style="background-image:url('img/area.gif');">
+								<%= data.attributes.landArea%>m2
+							</td>
+							</tr>
+				</table>
+
+				<table class="property-info property-info-main">
+					<tr>
+						<td>
+							Year Built:
+						</td>
+						<td>$<%= data.attributes.yearBuilt %></td>
+					</tr>
+					<tr>
+						<td>Floor Area:</td>
+						<td><%= data.attributes.floorArea %></td>
+					</tr>
+					<tr>
+						<td>
+							Condition of Property:
+						</td>
+						<td>?????????????</td>
+					</tr>
+					<tr>
+						<td>
+							Property Type:
+						</td>
+						<td><%= data.propertyType %></td>
+					</tr>
+					<tr>
+						<td>
+							Land Use:
+						</td>
+						<td><%= data.site ? data.site.landUsePrimary : '' %></td>
+					</tr>
+					<tr>
+						<td>
+							LotPlan:
+						</td>
+						<td><%= data.parcel ? data.parcel.lot : '' %></td>
+					</tr>
+					<tr>
+						<td>
+							Last Sale Date/Price:
+						</td>
+						<td>
+		        <%= data.lastSaleDetail ? data.lastSaleDetail.contractDate : '' %> / <%= data.lastSaleDetail ? data.lastSaleDetail.price : '' %>
+		        </td>
+					</tr>			
+				</table>
+	</div>
+</div>
+
+	<div class="small-print">
+	 *A Forecast Standard Deviation is an estimate of the variation between a modelled automated valuation and the market value of a property. A smaller FSD indicates our automated
+	valuation is likely closer to the true market value of a property than a larger FSD.
+	</div>
+</div>
+
+<div class="section-heading">
+LOCATION HIGHLIGHTS
+</div>
+
+<div class="flex-container" style="flex-wrap:wrap">
+<% for (var i = 0; data.propertyPhotoList && i < data.propertyPhotoList.length; i++) { %>
+<div>
+  <img class="property-photo flex-item" src="<%= data.propertyPhotoList[i].mediumPhotoUrl %>" />
+</div>
+<% } %>
+</div>
+
+<div class="section-heading">
+PAST SALES
+</div>
+
+<% include sales.ejs%>
+
+CHATSWOOD STATISTICS - A SNAP SHOT
+Incorporating RP Data's Suburb Scorecard
+
+<table>
+<tr>
+CHATSWOOD - Median Price
+<tr>
+Period
+Median Price for Houses
+Median Price for Units
+<tr>
+2017
+$2,400,000
+$920,000
+</table>
+
+<table>
+<tr>
+CHATSWOOD - Past Sales - Houses
+<tr>
+<td>
+2016
+</td>
+</tr>
+<tr>
+<td>
+0
+</td>
+</tr>
+</table>
+
+<table>
+<th>
+CHATSWOOD - Past Sales - Units
+</th>
+<tr>
+<td>
+2016
+</td>
+</tr>
+<tr>
+<td>
+0
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td colspan=3>
+Capital Growth
+</td>
+</tr>
+<tr>
+<td>
+Period
+</td>
+<td>
+Capital Growth % Houses
+</td>
+<td>
+Capital Growth % Units
+</td>
+</tr>
+<tr>
+<td>
+2016
+</td>
+<td>
+15%
+</td>
+<td>
+5.7%
+</td>
+</tr>
+</table>
+
+<table>
+<th>
+Sales By Price (Past 12 Months)
+</th>
+<td>
+Houses
+</td>
+<td>
+Units
+</td>
+<td>
+
+</td>
+<td>
+
+</td>
+</table>
