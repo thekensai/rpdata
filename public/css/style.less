@@ -1,0 +1,119 @@
+@import "bootstrap-3.3.7/less/bootstrap.less";
+
+body  {
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* header */
+#site-header .navbar  {
+  border-radius: 0;
+  border: none;
+  margin: 0;
+}
+
+/* main section */
+#site-main  {
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+/* footer */
+#site-footer  {
+  text-align: center;
+  padding-bottom: 30px;
+  padding-top: 30px;
+  font-size: 12px;
+  background: #222;
+  color: #999;
+}
+
+.property-attribute td {
+  width: 65px;
+  height: 65px;
+  background-repeat:no-repeat;
+  vertical-align:bottom;
+  text-align:center;
+  border: 1px;border-color: grey;border-style: solid;
+}
+
+.property-info tr {
+  border-bottom: 1px;border-bottom-color: black;border-bottom-style: dashed; line-height: 30px;
+}
+
+
+.property-image {
+  cursor: pointer;
+}
+
+.flex-container{
+  display: flex; 
+}
+
+.flex-container-inner{
+  display: flex; 
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width:1100px) {
+  .flex-container   { flex-wrap: wrap;  }
+  /*.flex-item:first-child { flex-basis: 100%; }*/
+}
+@media screen and (max-width:660px){
+  .flex-container{flex-flow:column;}
+  /*.flex-item:first-child {flex-basis:100%;max-width: 87%}*/
+}
+
+.visible {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 1s linear;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.address {
+  .text-danger;
+  font-size:xx-large;
+}
+
+.property-info {
+  padding: 8px;
+  width:99%;
+  .bg-warning; 
+}
+
+.property-photo {
+  padding: 5px
+}
+
+.heading {
+  color: red;
+  font-weight: 600;
+  padding-left: 10px;
+}
+
+.section-heading {
+  .heading;
+  font-size:x-large;
+}
+
+.property-info-sale tr:nth-of-type(2) td {
+  .heading
+}
+
+.property-info-main tr td:first-of-type {
+  .heading
+}
+
+.property-info-sale tr:nth-of-type(3) td {
+  padding-left: 10px
+}
+
+.small-print {
+  font-size:x-small;
+}

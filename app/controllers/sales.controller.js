@@ -25,7 +25,13 @@ module.exports = {
     method: 'GET'
   }, function (err, response, body) {
   		//console.log('error', err);
-  		if (response && response.headers['app_messages']) {
+  		if (err) {
+	      		//console.log(req.params);
+	          console.log('error ', err ); 
+	      		res.writeHead(500);
+	      		res.end();
+	  		}
+	  	else if (response && response.headers['app_messages']) {
       		//console.log(req.params);
           console.log(response.headers['app_messages'] ); 
       		res.writeHead(500);
@@ -33,7 +39,7 @@ module.exports = {
   		}
     	else {
     		var json = JSON.parse(body);
-
+console.log('json', json);
     		showPropertyList(res, req.params.suburb, json["_embedded"]["propertySummaryList"]);
     	}
     });
@@ -98,9 +104,16 @@ module.exports = {
 
 						var json = JSON.parse(body_inner);
 
-			            res.render('pages/sales', {layout: false, data: json["_embedded"]["propertySummaryList"].map(
-				          s => s.propertySummary
-				        )});
+			            res.render('pages/sales', 
+			            	{
+			            		layout: false, 
+			            		data: {
+			            			propertySummaryList: 
+			            			json["_embedded"]["propertySummaryList"].map(
+						         		s => s.propertySummary)
+						        }
+			            	}
+						);
 					  });
 	    		
 	        }
@@ -117,12 +130,17 @@ function showPropertyList(res, suburb, list) {
           return;
         }
         
-        res.render('pages/sales', {layout: false, data: list.map(
+        res.render('pages/sales', 
+        	{
+        		layout: false, 
+        		data: 
+        		{
+        			propertySummaryList: list.map(
           s => {
             var summary = s.propertySummary;
             summary.address.singleLineAddress = [summary.address.singleLineAddress.substring(0, summary.address.singleLineAddress.length - locality.locality.length + 1), locality.locality];
             return summary;
           }
-        )});
+        )}});
     });
 };

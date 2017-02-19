@@ -4,6 +4,7 @@ const express      = require('express'),
   mainController   = require('./controllers/main.controller'),
   chartController = require('./controllers/chart.controller'),
   salesController = require('./controllers/sales.controller');
+  propertyController = require('./controllers/property.controller');
 
 // export router
 module.exports = router;
@@ -13,6 +14,6 @@ module.exports = router;
 router.get('/', mainController.showHome);
 
 router.get('/sales/:suburb/:pType', salesController.showSales);
-router.get('/sales/:pId', salesController.showSalesAround);
+router.get('/property/:pId', propertyController.showProperty);
 
 router.get('/chart/:suburb/:pType/:width/:height', chartController.showSuburbYtd);

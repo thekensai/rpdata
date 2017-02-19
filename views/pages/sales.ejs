@@ -48,64 +48,64 @@
 -->
 
 <table style="border-collapse: separate;border-spacing: 5px;">
-<% for(var i=0; i < data.length; i++) { %>
+<% for(var i=0; i < data.propertySummaryList.length; i++) { %>
 <tr>
 <td style="padding:10px;border: 1px;border-color: grey;border-style: solid;">
 
 <div class="flex-container">
 	<!--left left right left right-->
-	<img src="<%= data[i].propertyPhoto.mediumPhotoUrl%>" style="padding:5px;" class="property-image flex-item" data-property-id="<%=data[i].id%>"/>
+	<img src="<%= data.propertySummaryList[i].propertyPhoto.mediumPhotoUrl%>" style="padding:5px;" class="property-image flex-item" data-property-id="<%=data.propertySummaryList[i].id%>"/>
 
 	<div class="flex-container-inner flex-item" style="">
 		<div  style="" class="flex-item-inner">
-			<% if (Array.isArray(data[i].address.singleLineAddress)) {%>
-				<% for(var j=0; j < data[i].address.singleLineAddress.length; j++) { %>
-				<span class="text-nowrap text-danger" style="font-size:xx-large"><%= data[i].address.singleLineAddress[j]%></span>
+			<% if (Array.isArray(data.propertySummaryList[i].address.singleLineAddress)) {%>
+				<% for(var j=0; j < data.propertySummaryList[i].address.singleLineAddress.length; j++) { %>
+				<span class="text-nowrap text-danger" style="font-size:xx-large"><%= data.propertySummaryList[i].address.singleLineAddress[j]%></span>
 				<% }%>
 			<%} else {%>
-				<span class="text-danger" style="font-size:xx-large"><%= data[i].address.singleLineAddress%></span>
+				<span class="text-danger" style="font-size:xx-large"><%= data.propertySummaryList[i].address.singleLineAddress%></span>
 			<% } %>
 		</div>
 
 		<table class="property-attribute"  style="padding: 8px; border-collapse: separate;border-spacing: 5px;">
 					<tr>
 					<td style="background-image:url('img/bed.gif');">
-						<%= data[i].attributes.bedrooms%>
+						<%= data.propertySummaryList[i].attributes.bedrooms%>
 					</td>
 					<td style="background-image:url('img/bath.gif');">
-						<%= data[i].attributes.bathrooms%>
+						<%= data.propertySummaryList[i].attributes.bathrooms%>
 					</td>
 					<td style="background-image:url('img/carpark.gif');">
-						<%= data[i].attributes.lockUpGarages%>
+						<%= data.propertySummaryList[i].attributes.lockUpGarages%>
 					</td>
 					<td style="background-image:url('img/area.gif');">
-						<%= data[i].attributes.landArea%>m2
+						<%= data.propertySummaryList[i].attributes.landArea%>m2
 					</td>
 					</tr>
 		</table>
 
-		<table style="padding: 8px;width:95%" class="bg-warning property-info">
+		<table class="property-info">
 			<tr>
 				<td class="heading">
 					Sale Price:
 				</td>
-				<td>$<%= data[i].lastSaleDetail.price%></td>
+				<td>$<%= data.propertySummaryList[i].lastSaleDetail.price%></td>
 			</tr>
 			<tr>
 				<td class="heading">Sale date:</td>
-				<td><%= data[i].lastSaleDetail.contractDate%></td>
+				<td><%= data.propertySummaryList[i].lastSaleDetail.contractDate%></td>
 			</tr>
 			<tr>
 				<td class="heading">
 					Land Size:
 				</td>
-				<td><%= data[i].attributes.landArea%>m2</td>
+				<td><%= data.propertySummaryList[i].attributes.landArea%>m2</td>
 			</tr>
 			<tr>
 				<td class="heading">
 					Distance From Subject
 				</td>
-				<td><%= data[i].radiusSummary ? data[i].radiusSummary.distanceFromPoint + 'KM' : '' %></td>
+				<td><%= data.propertySummaryList[i].radiusSummary ? data.propertySummaryList[i].radiusSummary.distanceFromPoint + 'KM' : '' %></td>
 				
 			</tr>
 		</table>
@@ -115,8 +115,8 @@
 			<span  class="heading"><b>Attributes:</b></span>
 			<br>
 			<span style="padding-left: 10px;">
-			<%= data[i].attributes.bedrooms%> Beds, <%= data[i].attributes.bathrooms%> Baths, <%= data[i].attributes.carSpaces%> Car Spaces,
-			<%= data[i].attributes.lockUpGarages%> Lock Up Garages,  Ensuites
+			<%= data.propertySummaryList[i].attributes.bedrooms%> Beds, <%= data.propertySummaryList[i].attributes.bathrooms%> Baths, <%= data.propertySummaryList[i].attributes.carSpaces%> Car Spaces,
+			<%= data.propertySummaryList[i].attributes.lockUpGarages%> Lock Up Garages,  Ensuites
 			</span>
 		</div>
 		</div>
@@ -130,8 +130,7 @@
 <script type='text/javascript'>
         $(".property-image").click(function (e) {
           $.ajax({
-              url: "/sales/" + $(this).data('property-id') + '/' 
-                ,//+ $('#selectedPropertyType').data('property-type'), 
+              url: "/property/" + $(this).data('property-id'),
               success: function(result){
                 $("#sales").addClass('hidden');
                 setTimeout(function() {
