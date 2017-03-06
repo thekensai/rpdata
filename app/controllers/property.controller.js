@@ -94,8 +94,9 @@ module.exports = {
 	    		var json = JSON.parse(body);
 // "message": "Invalid token provided."
 //console.log('josn is', JSON.stringify(json, null, 2));
-	    		var coord = json.property.coordinate;
-	    		var type = json.property.propertyType;
+				var prop = json.property;
+	    		var coord = prop.coordinate;
+	    		var type = prop.propertyType;
 	
 				request({
 					    headers: {
@@ -126,9 +127,15 @@ module.exports = {
 				          s => s.propertySummary
 				        )};
 
-						var prop = json.property;
+						
 
 				        response.address = prop.address;
+				        response.suburb = {
+				        	name : prop.address.street.locality.name,
+				        	lId: prop.address.street.locality.id,
+				        	token: global.access_token
+				        };
+				        //console.log(JSON.stringify(prop.address,null,2));
 				        response.attributes = prop.attributes;
 				        response.parcelList = prop.parcelList;
 				        response.propertyType = prop.propertyType;

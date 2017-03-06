@@ -160,25 +160,26 @@ PAST SALES
 
 <% include sales.ejs%>
 
-CHATSWOOD STATISTICS - A SNAP SHOT
-Incorporating RP Data's Suburb Scorecard
+<div class="section-heading">
+<%= data.suburb.name%> STATISTICS - A SNAP SHOT
+</div>
 
 <table>
 <tr>
-CHATSWOOD - Median Price
+<%= data.suburb.name%> - Median Price
 <tr>
-Period
-Median Price for Houses
-Median Price for Units
+<td>Period</td>
+<td>Median Price for Houses</td>
+<td>Median Price for Units</td>
 <tr>
-2017
-$2,400,000
-$920,000
+<td>2017</td>
+<td>$2,400,000</td>
+<td>$920,000</td>
 </table>
 
 <table>
-<tr>
-CHATSWOOD - Past Sales - Houses
+<th>
+<%= data.suburb.name%> - Past Sales - Houses
 <tr>
 <td>
 2016
@@ -193,7 +194,7 @@ CHATSWOOD - Past Sales - Houses
 
 <table>
 <th>
-CHATSWOOD - Past Sales - Units
+<%= data.suburb.name%> - Past Sales - Units
 </th>
 <tr>
 <td>
@@ -208,11 +209,9 @@ CHATSWOOD - Past Sales - Units
 </table>
 
 <table>
-<tr>
-<td colspan=3>
+<th>
 Capital Growth
-</td>
-</tr>
+
 <tr>
 <td>
 Period
@@ -237,20 +236,14 @@ Capital Growth % Units
 </tr>
 </table>
 
-<table>
-<th>
-Sales By Price (Past 12 Months)
-</th>
+<table> <th> Sales By Price (Past 12 Months) </th> 
+<tr> <td> Houses </td> 
 <td>
-Houses
+Units </td> </tr> 
+<tr> <td> 
+<img src="https://scs-sandbox-api.corelogic.asia/charts/v2/chart.png?chartSize=300x400&fromDate=2013-01-01&toDate=2017-01-01&s1.lTId=8&metricTypeGroupId=2&s1.pTId=1&s1.lId=<%=data.suburb.lId%>&access_token=<%= data.suburb.token%>"> 
 </td>
 <td>
-Units
-</td>
-<td>
-
-</td>
-<td>
-
+<img src="https://scs-sandbox-api.corelogic.asia/charts/v2/chart.png?chartSize=300x400&fromDate=2013-01-01&toDate=2017-01-01&s1.lTId=8&metricTypeGroupId=2&s1.pTId=2&s1.lId=<%=data.suburb.lId%>&access_token=<%= data.suburb.token%>">
 </td>
 </table>
